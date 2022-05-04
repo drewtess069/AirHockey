@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Media;
 
 namespace AirHockey
 {
     public partial class Form1 : Form
     {
+        SoundPlayer puckPlayer = new SoundPlayer(Properties.Resources.puckBounce);
 
         Rectangle border = new Rectangle(5, 5, 390, 490);
         Rectangle player1 = new Rectangle(180, 20, 40, 10);
@@ -232,6 +234,9 @@ namespace AirHockey
             //Adjust score accordingly
             if (net1.IntersectsWith(ball))
             {
+                SoundPlayer goalPlayer = new SoundPlayer(Properties.Resources.goal);
+                goalPlayer.Play();
+
                 player1Score++;
                 p1ScoreLabel.Text = Convert.ToString(player1Score);
 
@@ -272,6 +277,9 @@ namespace AirHockey
             }
             if (net2.IntersectsWith(ball))
             {
+                SoundPlayer goalPlayer = new SoundPlayer(Properties.Resources.goal);
+                goalPlayer.Play();
+
                 player2Score++;
                 p2ScoreLabel.Text = Convert.ToString(player2Score);
 
@@ -314,14 +322,17 @@ namespace AirHockey
             //Set boundaries for ball
             if (ball.Y < blackPen.Width || ball.Y > this.Height - blackPen.Width - ball.Height)
             {
+                puckPlayer.Play();
                 ballYSpeed *= -1;
             }
             if (ball.X > this.Width - blackPen.Width - ball.Width)
             {
+                puckPlayer.Play();
                 ballXSpeed *= -1;
             }
             if (ball.X < blackPen.Width)
             {
+                puckPlayer.Play();
                 ballXSpeed *= -1;
             }
 
@@ -337,9 +348,11 @@ namespace AirHockey
                 Rectangle p1Sec3 = new Rectangle(player1.X + 24, player1.Y - 1, 8, 12);
                 Rectangle p1Sec4 = new Rectangle(player1.X + 32, player1.Y - 1, 8, 12);
                 Rectangle p1Sec5 = new Rectangle(player1.X + 16, player1.Y -1, 8, 12);
-
+                
+                puckPlayer.Play();
                 if (p1Sec1.IntersectsWith(ball))
                 {
+
                     if (ballXSpeed < 5)
                     {
                         ballXSpeed = -5f;
@@ -404,6 +417,7 @@ namespace AirHockey
                 Rectangle p1Sec5 = new Rectangle(player1.X + 16, player1.Y - 1, 8, 12);
 
                 ballYSpeed *= -1;
+                puckPlayer.Play();
 
                 if (p1Sec1.IntersectsWith(ball))
                 {
