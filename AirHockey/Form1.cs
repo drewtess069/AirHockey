@@ -14,6 +14,10 @@ namespace AirHockey
 {
     public partial class Form1 : Form
     {
+        //Air Hockey Game -- Drew Tessmer, May 3
+        //This is a virtual representation of an Air Hockey Game
+
+
         SoundPlayer puckPlayer = new SoundPlayer(Properties.Resources.puckBounce);
 
         Rectangle border = new Rectangle(5, 5, 390, 490);
@@ -22,18 +26,6 @@ namespace AirHockey
         Rectangle ball = new Rectangle(192, 248, 10, 10);
         Rectangle net1 = new Rectangle(140, 0, 120, 10);
         Rectangle net2 = new Rectangle(136, 490, 120, 10);
-
-        Rectangle p1Sec1 = new Rectangle(180, 19, 8, 12);
-        Rectangle p1Sec2 = new Rectangle(188, 19, 8, 12);
-        Rectangle p1Sec3 = new Rectangle(204, 19, 8, 12);
-        Rectangle p1Sec4 = new Rectangle(212, 19, 8, 12);
-        Rectangle p1Sec5 = new Rectangle(196, 19, 8, 12);
-
-        Rectangle p2Sec1 = new Rectangle(176, 247, 8, 12);
-        Rectangle p2Sec2 = new Rectangle(184, 247, 8, 12);
-        Rectangle p2Sec3 = new Rectangle(200, 247, 8, 12);
-        Rectangle p2Sec4 = new Rectangle(208, 247, 8, 12);
-        Rectangle p2Sec5 = new Rectangle(192, 247, 8, 12);
 
         Pen blackPen = new Pen(Color.Black, 10);
         SolidBrush blueBrush = new SolidBrush(Color.Blue);
@@ -77,11 +69,11 @@ namespace AirHockey
             e.Graphics.FillRectangle(whiteBrush, net1);
             e.Graphics.FillRectangle(whiteBrush, net2);
 
-           /* e.Graphics.FillRectangle(blueBrush, p1Sec1);
-            e.Graphics.FillRectangle(blueBrush, p1Sec2);
-            e.Graphics.FillRectangle(blueBrush, p1Sec3);
-            e.Graphics.FillRectangle(blueBrush, p1Sec4);
-           */
+            /* e.Graphics.FillRectangle(blueBrush, p1Sec1);
+             e.Graphics.FillRectangle(blueBrush, p1Sec2);
+             e.Graphics.FillRectangle(blueBrush, p1Sec3);
+             e.Graphics.FillRectangle(blueBrush, p1Sec4);
+            */
         }
 
 
@@ -158,165 +150,62 @@ namespace AirHockey
             if ((wDown == true) && (player1.Y > blackPen.Width))
             {
                 player1.Y -= playerSpeed;
-                p1Sec1.Y -= playerSpeed;
-                p1Sec2.Y -= playerSpeed;
-                p1Sec3.Y -= playerSpeed;
-                p1Sec4.Y -= playerSpeed;
+
             }
 
             //if ((aDown == true) && (player1.X > 0 + blackPen.Width) && (p1Sec1.X > 0 + blackPen.Width) && (p1Sec2.X > 0 + blackPen.Width) && (p1Sec3.X > 0 + blackPen.Width) && (p1Sec4.X > 0 + blackPen.Width))
             if ((aDown == true) && (player1.X > 0 + blackPen.Width))
             {
                 player1.X -= playerSpeed;
-                p1Sec1.X -= playerSpeed;
-                p1Sec2.X -= playerSpeed;
-                p1Sec3.X -= playerSpeed;
-                p1Sec4.X -= playerSpeed;
             }
 
             //if ((sDown == true) && (player1.Y < this.Height / 2 - player1.Height) && (p1Sec1.Y < this.Height / 2 - player1.Height) && (p1Sec2.Y < this.Height / 2 - player1.Height) && (p1Sec3.Y < this.Height / 2 - player1.Height) && (p1Sec4.Y < this.Height / 2 - player1.Height))
             if ((sDown == true) && (player1.Y < this.Height / 2 - player1.Height))
             {
                 player1.Y += playerSpeed;
-                p1Sec1.Y += playerSpeed;
-                p1Sec2.Y += playerSpeed;
-                p1Sec3.Y += playerSpeed;
-                p1Sec4.Y += playerSpeed;
             }
 
             //if ((dDown == true) && (player1.X < this.Width - blackPen.Width - player1.Width) && (p1Sec1.X < this.Width - blackPen.Width - player1.Width) && (p1Sec2.X < this.Width - blackPen.Width - player1.Width) && (p1Sec3.X < this.Width - blackPen.Width - player1.Width) && (p1Sec4.X < this.Width - blackPen.Width - player1.Width))
-            if ((dDown == true) && (player1.X < this.Width - blackPen.Width - player1.Width) )
+            if ((dDown == true) && (player1.X < this.Width - blackPen.Width - player1.Width))
 
             {
                 player1.X += playerSpeed;
-                p1Sec1.X += playerSpeed;
-                p1Sec2.X += playerSpeed;
-                p1Sec3.X += playerSpeed;
-                p1Sec4.X += playerSpeed;
             }
 
             //move player 2 
             if (upArrowDown == true && player2.Y > this.Height / 2)
             {
                 player2.Y -= playerSpeed;
-                p2Sec1.Y -= playerSpeed;
-                p2Sec2.Y -= playerSpeed;
-                p2Sec3.Y -= playerSpeed;
-                p2Sec4.Y -= playerSpeed;
             }
             if (leftArrowDown == true && player2.X > 0 + blackPen.Width)
             {
                 player2.X -= playerSpeed;
-                p2Sec1.X -= playerSpeed;
-                p2Sec2.X -= playerSpeed;
-                p2Sec3.X -= playerSpeed;
-                p2Sec4.X -= playerSpeed;
             }
 
             if (downArrowDown == true && player2.Y < this.Height - blackPen.Width - player2.Height)
             {
                 player2.Y += playerSpeed;
-                p2Sec1.Y += playerSpeed;
-                p2Sec2.Y += playerSpeed;
-                p2Sec3.Y += playerSpeed;
-                p2Sec4.Y += playerSpeed;
             }
             if (rightArrowDown == true && player2.X < this.Width - blackPen.Width - player2.Width)
             {
                 player2.X += playerSpeed;
-                p2Sec1.X += playerSpeed;
-                p2Sec2.X += playerSpeed;
-                p2Sec3.X += playerSpeed;
-                p2Sec4.X += playerSpeed;
             }
 
             //check if ball goes in either net
             //Adjust score accordingly
             if (net1.IntersectsWith(ball))
             {
-                SoundPlayer goalPlayer = new SoundPlayer(Properties.Resources.goal);
-                goalPlayer.Play();
-
                 player1Score++;
                 p1ScoreLabel.Text = Convert.ToString(player1Score);
 
-                ball.X = 192;
-                ball.Y = 248;
-
-                player1.X = 180;
-                player1.Y = 20;
-
-                player2.X = 176;
-                player2.Y = 470;
-
-                p1Sec1.X = 180;
-                p1Sec1.Y = 20;
-                p1Sec2.X = 188;
-                p1Sec2.Y = 20;
-                p1Sec3.X = 204;
-                p1Sec3.Y = 20;
-                p1Sec4.X = 212;
-                p1Sec4.Y = 20;
-
-                p2Sec1.X = 176;
-                p2Sec1.Y = 248;
-                p2Sec2.X = 184;
-                p2Sec2.Y = 248;
-                p2Sec3.X = 200;
-                p2Sec3.Y = 248;
-                p2Sec4.X = 208;
-                p2Sec4.Y = 248;
-
-                ballXSpeed = 3;
-                ballYSpeed = 4;
-
-                Refresh();
-                Thread.Sleep(1000);
-
-                ballYSpeed *= -1;
+                Goal();
             }
             if (net2.IntersectsWith(ball))
             {
-                SoundPlayer goalPlayer = new SoundPlayer(Properties.Resources.goal);
-                goalPlayer.Play();
-
                 player2Score++;
                 p2ScoreLabel.Text = Convert.ToString(player2Score);
 
-                ball.X = 192;
-                ball.Y = 248;
-
-                player1.X = 180;
-                player1.Y = 20;
-
-                player2.X = 176;
-                player2.Y = 470;
-
-                p1Sec1.X = 180;
-                p1Sec1.Y = 20;
-                p1Sec2.X = 188;
-                p1Sec2.Y = 20;
-                p1Sec3.X = 204;
-                p1Sec3.Y = 20;
-                p1Sec4.X = 212;
-                p1Sec4.Y = 20;
-
-                p2Sec1.X = 176;
-                p2Sec1.Y = 248;
-                p2Sec2.X = 184;
-                p2Sec2.Y = 248;
-                p2Sec3.X = 200;
-                p2Sec3.Y = 248;
-                p2Sec4.X = 208;
-                p2Sec4.Y = 248;
-
-                ballXSpeed = 3;
-                ballYSpeed = 4;
-
-                Refresh();
-                Thread.Sleep(1000);
-
-                ballYSpeed *= -1;
+                Goal();
             }
 
             //Set boundaries for ball
@@ -347,8 +236,8 @@ namespace AirHockey
                 Rectangle p1Sec2 = new Rectangle(player1.X + 8, player1.Y - 1, 8, 12);
                 Rectangle p1Sec3 = new Rectangle(player1.X + 24, player1.Y - 1, 8, 12);
                 Rectangle p1Sec4 = new Rectangle(player1.X + 32, player1.Y - 1, 8, 12);
-                Rectangle p1Sec5 = new Rectangle(player1.X + 16, player1.Y -1, 8, 12);
-                
+                Rectangle p1Sec5 = new Rectangle(player1.X + 16, player1.Y - 1, 8, 12);
+
                 puckPlayer.Play();
                 if (p1Sec1.IntersectsWith(ball))
                 {
@@ -398,11 +287,11 @@ namespace AirHockey
                     ball.Y = player1.Y - ball.Height - 3;
                 }
             }
-            if((ballYSpeed > maxYSpeed) || (ballYSpeed < minYSpeed))
+            if ((ballYSpeed > maxYSpeed) || (ballYSpeed < minYSpeed))
             {
                 ballYSpeed -= 1f;
             }
-            if((ballXSpeed > maxXSpeed) || (ballXSpeed < minXSpeed))
+            if ((ballXSpeed > maxXSpeed) || (ballXSpeed < minXSpeed))
             {
                 ballXSpeed *= 0.9f;
             }
@@ -526,7 +415,6 @@ namespace AirHockey
                 }
                 else if (p2Sec5.IntersectsWith(ball))
                 {
-
                     ball.Y = player2.Y - ball.Height - 3;
                 }
             }
@@ -601,26 +489,6 @@ namespace AirHockey
                 }
             }
 
-
-
-
-
-
-
-
-/*
-            if (player2.IntersectsWith(ball) && ballYSpeed > 0)
-            {
-                ballYSpeed *= -1;
-                ball.Y = player2.Y - ball.Height;
-            }
-            else if (player2.IntersectsWith(ball) && ballYSpeed < 0)
-            {
-                ballYSpeed *= -1;
-                ball.Y = player2.Y + ball.Height;
-            }
-*/
-            // check score and stop game if either player is at 3 
             if (player1Score == 3)
             {
                 gameTimer.Enabled = false;
@@ -634,6 +502,30 @@ namespace AirHockey
                 winLabel.Text = "PLAYER 2 WINS!";
             }
             Refresh();
+        }
+
+        private void Goal()
+        {
+            SoundPlayer goalPlayer = new SoundPlayer(Properties.Resources.goal);
+            goalPlayer.Play();
+
+            ball.X = 192;
+            ball.Y = 248;
+
+            player1.X = 180;
+            player1.Y = 20;
+
+            player2.X = 176;
+            player2.Y = 470;
+
+
+            ballXSpeed = 3;
+            ballYSpeed = 4;
+
+            Refresh();
+            Thread.Sleep(1000);
+
+            ballYSpeed *= -1;
         }
     }
 }
